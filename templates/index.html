@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Facial Emotion Detection</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <section class="hero">
+      <h1>AI-Powered <span class="highlight">Emotion Detection</span></h1>
+      <p>
+        Experience cutting-edge facial emotion recognition technology. Real-time
+        analysis with 95% accuracy using advanced machine learning.
+      </p>
+      <div class="buttons">
+        <button onclick="startCamera()">📷 Start Detection</button>
+        <button class="secondary">Learn More</button>
+      </div>
+      <script>
+        function startCamera() {
+          const video = document.getElementById("video");
+          const status = document.getElementById("status");
+
+          video.src = "/video";
+          if (status) {
+            status.style.display = "none";
+          }
+        }
+      </script>
+    </section>
+
+    <section class="main">
+      <div class="controls">
+        <h2>📡 Camera Controls</h2>
+        <button onclick="startCamera()">Start Camera</button>
+        <button onclick="stopCamera()" class="secondary">Stop Camera</button>
+        <ul>
+          <li>
+           Detects 7 emotions: Happy, Sad, Angry, Surprise, Fear, Disgust, Neutral
+          </li>
+          <li> Works in real-time with high accuracy </li>
+          <li> Secure - all processing happens locally </li>
+        </ul>
+      </div>
+
+      <div class="video-feed">
+        <h2>Live Video Feed</h2>
+        <p id="status">Click "Start Camera" to begin</p>
+        <img id="video" src="{{ url_for('static', filename='camera.jpg') }}" alt="Camera Not Active" />
+      </div>
+    </section>
+
+    <!-- <script>
+      function startCamera() {
+        document.getElementById("video").src = "/video";
+        document.getElementById("status").style.display = "none";
+      }
+    </script> -->
+    <script>
+      function startCamera() {
+        const video = document.getElementById("video");
+        const status = document.getElementById("status");
+
+        video.src = "/video";
+        if (status) {
+          status.style.display = "none";
+        }
+      }
+
+      function stopCamera() {
+        const video = document.getElementById("video");
+        video.src = "{{ url_for('static', filename='camera.jpg') }}";
+        fetch("/stop"); 
+        const status = document.getElementById("status");
+        if (status) {
+          status.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
