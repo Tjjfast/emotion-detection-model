@@ -43,23 +43,23 @@ The final part of the network is a classification head, which flattens the featu
 The model was compiled using the Adam optimizer and categorical_crossentropy loss function. It was trained for 30 epochs so far, and the final weights were saved to the emotion_detection_model.h5 file.
 
 ## ⚙️ How It Works
-Flask Backend: The app.py script initializes a Flask web server.
+- Flask Backend: The app.py script initializes a Flask web server.
 
-Video Capture: When the main page is loaded, it requests the video feed from the /video endpoint. OpenCV captures frames from the default webcam.
+- Video Capture: When the main page is loaded, it requests the video feed from the /video endpoint. OpenCV captures frames from the default webcam.
 
-Face Detection: Each frame is converted to grayscale. The Haar Cascade classifier (haarcascade_frontalface_default.xml) identifies the coordinates of any faces.
+- Face Detection: Each frame is converted to grayscale. The Haar Cascade classifier (haarcascade_frontalface_default.xml) identifies the coordinates of any faces.
 
-Emotion Prediction:
+- Emotion Prediction:
 
-For each detected face, the region of interest is extracted and resized to 48x48 pixels.
+    For each detected face, the region of interest is extracted and resized to 48x48 pixels.
 
-This image is normalized and reshaped to match the input requirements of the CNN model.
+    This image is normalized and reshaped to match the input requirements of the CNN model.
 
-The pre-trained model (model_file_30epochs.h5) predicts the emotion.
+    The pre-trained model (model_file_30epochs.h5) predicts the emotion.
 
-The emotion with the highest probability is chosen as the result.
+    The emotion with the highest probability is chosen as the result.
 
-Annotation & Streaming: A blue rectangle is drawn around the detected face, and the predicted emotion is written above it. The final frame is encoded as a JPEG and streamed to the browser.
+- Annotation & Streaming: A blue rectangle is drawn around the detected face, and the predicted emotion is written above it. The final frame is encoded as a JPEG and streamed to the browser.
 
 ## 🛠️ Setup and Installation
 Choose one of the two methods below to run the application.
