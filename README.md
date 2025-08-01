@@ -9,7 +9,7 @@ This project is a complete real-time emotion detection system. It uses a custom-
 
 - Accurate Face Detection: Utilizes OpenCV's Haar Cascade classifier to robustly detect faces in the video feed.
 
-- Deep Learning for Emotion Recognition: Employs a custom Keras/TensorFlow CNN model trained on the FER2013 dataset to classify faces into one of seven emotions: Angry, Disgust, Fear, Happy, Neutral, Sad, or Surprise.
+- Deep Learning for Emotion Recognition: Employs a custom Keras/TensorFlow CNN model trained on the [FER2013](https://www.kaggle.com/datasets/msambare/fer2013) dataset to classify faces into one of seven emotions: Angry, Disgust, Fear, Happy, Neutral, Sad, or Surprise.
 
 - Complete Project Documentation: Includes the Jupyter Notebook used for model training, providing full transparency into the development process.
 
