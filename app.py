@@ -25,6 +25,8 @@ def gen_frames():
         if camera is None:
             break
         success, frame = camera.read()
+        frame = cv2.flip(frame, 1)
+
         if not success:
             break
         else:
