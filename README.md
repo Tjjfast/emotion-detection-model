@@ -2,7 +2,11 @@
 This project is a complete real-time emotion detection system. It uses a custom-trained Convolutional Neural Network (CNN) to identify emotions from a live webcam feed, which is served through a Python Flask web application.
 
 ## 🎥 Demo
-(Note: This is a placeholder GIF. You can replace it with a screen recording of your actual application.)
+<img width="1885" height="856" alt="Image" src="https://github.com/user-attachments/assets/cfdf97ee-85ed-482d-b8d8-ae55515b44f4" />
+<img width="1815" height="870" alt="Image" src="https://github.com/user-attachments/assets/c7be4fe5-e2c6-4dfc-bead-fc0df93fcc47" />
+<img width="1829" height="873" alt="Image" src="https://github.com/user-attachments/assets/8d46f5c5-ea8c-48ff-b131-5b233abc195c" />
+<img width="1828" height="880" alt="Image" src="https://github.com/user-attachments/assets/358ae66a-c0f7-4221-a235-6191d743c773" />
+<img width="1832" height="858" alt="Image" src="https://github.com/user-attachments/assets/02533355-3e9b-4ae9-8048-ca6a894d8bcd" />
 
 ## ✨ Features
 - Real-Time Video Streaming: Captures video from your webcam and streams it to a web interface using Flask and OpenCV.
