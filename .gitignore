@@ -1,0 +1,14 @@
+# Ignore virtual environment
+venv/
+dist/
+build/
+data/
+app.spec
+emotion_detection_model.h5
+testdata.py
+VerySusVirus.zip
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+haarcascade_frontalface_default.xml
