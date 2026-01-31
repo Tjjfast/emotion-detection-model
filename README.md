@@ -2,81 +2,87 @@
 This project is a complete real-time emotion detection system. It uses a custom-trained Convolutional Neural Network (CNN) to identify emotions from a live webcam feed, which is served through a Python Flask web application.
 
 ## 🎥 Demo
-(Note: This is a placeholder GIF. You can replace it with a screen recording of your actual application.)
+<img width="1885" height="856" alt="Image" src="https://github.com/user-attachments/assets/cfdf97ee-85ed-482d-b8d8-ae55515b44f4" />
+<img width="1815" height="870" alt="Image" src="https://github.com/user-attachments/assets/c7be4fe5-e2c6-4dfc-bead-fc0df93fcc47" />
+<img width="1829" height="873" alt="Image" src="https://github.com/user-attachments/assets/8d46f5c5-ea8c-48ff-b131-5b233abc195c" />
+<img width="1828" height="880" alt="Image" src="https://github.com/user-attachments/assets/358ae66a-c0f7-4221-a235-6191d743c773" />
+<img width="1832" height="858" alt="Image" src="https://github.com/user-attachments/assets/02533355-3e9b-4ae9-8048-ca6a894d8bcd" />
 
 ## ✨ Features
-* Real-Time Video Streaming: Captures video from your webcam and streams it to a web interface using Flask and OpenCV.
-* Accurate Face Detection: Utilizes OpenCV's Haar Cascade classifier to robustly detect faces in the video feed.
-* Deep Learning for Emotion Recognition: Employs a custom Keras/TensorFlow CNN model trained on the FER2013 dataset to classify faces into one of seven emotions: Angry, Disgust, Fear, Happy, Neutral, Sad, or Surprise.
-* Complete Project Documentation: Includes the Jupyter Notebook used for model training, providing full transparency into the development process.
-* Standalone Executable: Comes with a pre-compiled .exe file for easy execution on Windows without any setup.
-* Simple Web Interface: A clean HTML page to view the live, annotated video feed.
+- Real-Time Video Streaming: Captures video from your webcam and streams it to a web interface using Flask and OpenCV.
+
+- Accurate Face Detection: Utilizes OpenCV's Haar Cascade classifier to robustly detect faces in the video feed.
+
+- Deep Learning for Emotion Recognition: Employs a custom Keras/TensorFlow CNN model trained on the [FER2013](https://www.kaggle.com/datasets/msambare/fer2013) dataset to classify faces into one of seven emotions: Angry, Disgust, Fear, Happy, Neutral, Sad, or Surprise.
+
+- Complete Project Documentation: Includes the Jupyter Notebook used for model training, providing full transparency into the development process.
+
+- Standalone Executable: Comes with a pre-compiled .exe file for easy execution on Windows without any setup.
+
+- Simple Web Interface: A clean HTML page to view the live, annotated video feed.
 
 ## 📂 Project Structure
 Your project directory should be set up as follows for the application to run correctly:
 ```
 .
-├── model.py  # File used for model training
-├── emotion_detection_model.h5         # The pre-trained Keras model
+├── Emotion_Detection_Model.ipynb  # Jupyter notebook for model training
+├── model_file_30epochs.h5         # The pre-trained Keras model
 ├── haarcascade_frontalface_default.xml # OpenCV face detection classifier
 ├── app.py                         # The main Flask application
 ├── requirements.txt               # Python dependencies
 ├── emotion_detector.exe           # Standalone executable for Windows
 └── templates/
     └── index.html                 # Frontend web page
-└── static/
-    └── camera.jpg                 # jpg used
-    └── styles.css                 # css styling
+└── templates/
+    └── styles.css                 # CSS Styling
+    └── camera.jpg                 # jpg 
 ```
-## 🧠 Model Training
+## ⚙️ How It Works
+The application workflow is as follows:
+
+- **Flask Backend:** The app.py script initializes a Flask web server to handle requests.
+
+- **Video Capture:** When the user navigates to the homepage, the browser requests the video feed from the /video endpoint. OpenCV then accesses the default webcam to start capturing frames.
+
+- **Face Detection:** Each captured frame is converted to grayscale. The pre-trained Haar Cascade classifier (haarcascade_frontalface_default.xml) scans the frame to identify the coordinates of any faces.
+
+- **Emotion Prediction:**
+
+  - For each detected face, the region of interest is cropped and resized to 48x48 pixels to match the model's input size.
+
+  - This grayscale face image is normalized and fed into the pre-trained Keras model (emotion_detection_model.h5).
+
+  - The model predicts the emotion, outputting a probability for each of the seven classes. The class with the highest probability is chosen as the final prediction.
+
+  - Annotation & Streaming: A blue rectangle is drawn around the detected face on the original video frame, and the predicted emotion is written as text above it. This annotated frame is then encoded as a JPEG and streamed to the browser.
+
+## 🧠 Model Details
 The emotion recognition model is a Convolutional Neural Network (CNN) built with Keras and trained on the FER2013 dataset.
 
 ### Data Processing
 Input images are 48x48 grayscale pictures of faces. To improve model robustness, the training data was augmented with random rotations, shears, zooms, and horizontal flips. All image pixel values were normalized to a [0, 1] range.
-
 ### CNN Architecture
-The model is a sequential CNN designed for image classification. It consists of four main convolutional blocks, each containing Conv2D, ReLU activation, MaxPooling2D, and Dropout layers.
-
-The final part of the network is a classification head, which flattens the feature maps and uses a Dense layer with 512 neurons, followed by the final softmax output layer that classifies the image into one of the seven emotion categories.
-
+The model is a sequential CNN designed for image classification. It consists of four main convolutional blocks, each containing Conv2D, ReLU activation, MaxPooling2D, and Dropout layers. This structure progressively extracts complex features while reducing dimensionality and preventing overfitting.
 ### Training
-The model was compiled using the Adam optimizer and categorical_crossentropy loss function. It was trained for 30 epochs so far, and the final weights were saved to the emotion_detection_model.h5 file.
-
-## ⚙️ How It Works
-- Flask Backend: The app.py script initializes a Flask web server.
-
-- Video Capture: When the main page is loaded, it requests the video feed from the /video endpoint. OpenCV captures frames from the default webcam.
-
-- Face Detection: Each frame is converted to grayscale. The Haar Cascade classifier (haarcascade_frontalface_default.xml) identifies the coordinates of any faces.
-
-- Emotion Prediction:
-
-    For each detected face, the region of interest is extracted and resized to 48x48 pixels.
-
-    This image is normalized and reshaped to match the input requirements of the CNN model.
-
-    The pre-trained model (model_file_30epochs.h5) predicts the emotion.
-
-    The emotion with the highest probability is chosen as the result.
-
-- Annotation & Streaming: A blue rectangle is drawn around the detected face, and the predicted emotion is written above it. The final frame is encoded as a JPEG and streamed to the browser.
-
+The model was trained for 30 epochs, and the final weights were saved to the emotion_detection_model.h5 file.
 ## 🛠️ Setup and Installation
 Choose one of the two methods below to run the application.
 
 ### Method 1: Running the Executable (Easiest)
-No setup required! This is for users who just want to try out the application on a Windows machine.
+- No setup required! This is for users who just want to try out the application on a Windows machine.
 
-Double-click emotion_detector.exe. A command prompt window will appear, indicating the server is running.
+- Ensure all the files (emotion_detector.exe, model_file_30epochs.h5, haarcascade_frontalface_default.xml, and the templates folder) are in the same directory.
 
-Open your web browser and navigate to `http://127.0.0.1:5000`.
+- Double-click emotion_detector.exe. A command prompt window will appear, indicating the server is running.
+
+- Open your web browser and navigate to `http://127.0.0.1:5000`.
 
 ### Method 2: Running from Python (For Developers)
 Follow these steps to run the application from the source code.
 
 **Prerequisites**
-* Python 3.7+
-* A webcam connected to your computer.
+- Python 3.7+
+- A webcam connected to your computer.
 
 **1. Install Dependencies**
 Open your terminal or command prompt, navigate to your project directory, and run the following command to install the required Python libraries from the requirements.txt file:
@@ -92,11 +98,12 @@ python app.py
 ```
 You should see output indicating that the Flask server is running:
 ```
- * Running on [http://127.0.0.1:5000](http://127.0.0.1:5000)
+Running on http://127.0.0.1:5000
 ```
 Open your web browser and navigate to `http://127.0.0.1:5000`.
 
-You should now see the live webpage!
+You should now see the live feed from your webcam with emotion detection running!
 
 ## 🛑 Stopping the Application
-To stop the Flask server, go to the terminal or command prompt window where it is running and press Ctrl+C.
+To stop the Flask server, go to the terminal or command prompt window where it is running and press `Ctrl+C`.
+
